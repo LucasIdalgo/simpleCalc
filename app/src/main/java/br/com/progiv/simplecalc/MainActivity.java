@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * soma; sub; div; multi
      */
-    String operator;                        //Operador de cálculo
+    String operator;                       //Operador de cálculo
 
     TextView RESULTSCREEN;
     Button btn01, btn02, btn03, btn04, btn05, btn06, btn07, btn08, btn09, btn00;
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Result = new int[2]; //Iniciando o array
+
+        operator = null;
 
         // Link com os componentes da tela:
         RESULTSCREEN = (TextView) findViewById(R.id.RESULTSCREEN);
@@ -175,6 +177,10 @@ public class MainActivity extends AppCompatActivity {
         btnSoma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(operator!=null){
+                    calcular();
+                    exibirResultado();
+                }
                 operator = "soma";
                 proximoNumero();
             }
@@ -183,7 +189,35 @@ public class MainActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(operator!=null){
+                    calcular();
+                    exibirResultado();
+                }
                 operator = "sub";
+                proximoNumero();
+            }
+        });
+
+        btnMult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(operator!=null){
+                    calcular();
+                    exibirResultado();
+                }
+                operator = "multi";
+                proximoNumero();
+            }
+        });
+
+        btnDiv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(operator!=null){
+                    calcular();
+                    exibirResultado();
+                }
+                operator = "div";
                 proximoNumero();
             }
         });
@@ -194,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 calcular();
                 exibirResultado();          //Troca o resultado na tela
                 Total = 0;                  //Zera o valor de total para não dar erro
-                count=0;
+                count = 0;
             }
         });
 
@@ -233,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
         Result[1] = 0;
         Total = 0;          //Zera o total
         count = 0;          //Zera a quantidade de Números
+        operator= null;       //Zera o operador armazenado
         exibirResultado();
     }
 
@@ -245,11 +280,13 @@ public class MainActivity extends AppCompatActivity {
             case "multi": Total = (Result[0] * Result[1]); break;
             case "div": Total = (Result[0] / Result[1]); break;
         }
-        //Se for um valor inválido
+        //Se for um valor válido
         if (Total<INVALID) {
             Result[0] = Total;          //Para executar mais operações
             Result[1] = 0;              //Passa para o segundo valor
             i = 1;
         }
+
+        operator = null;                   //Zera o operador
     }
 }
