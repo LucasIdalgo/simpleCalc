@@ -229,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 exibirResultado();          //Troca o resultado na tela
                 Total = 0;                  //Zera o valor de total para não dar erro
                 count = 0;
+                operator = null;
             }
         });
 
